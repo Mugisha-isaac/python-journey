@@ -8,11 +8,13 @@ y = np.random.normal(10.0, 2.0, 1000)
 slope, intercept, r, p, std_err = stats.linregress(x, y)
 
 
-def myFunc(x):
-    return slope * x + intercept
+# def myFunc(x):
+#     return slope * x + intercept
 
 
-myModel = list(map(myFunc, x))
-plt.scatter(x, y)
-plt.plot(x, myModel)
-plt.show()
+# myModel = list(map(myFunc, x))
+# plt.scatter(x, y)
+# plt.plot(x, myModel)
+# plt.show()
+
+print(r)
