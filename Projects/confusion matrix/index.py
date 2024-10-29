@@ -45,14 +45,14 @@ sns.heatmap(
     yticklabels=["Dog", "Not Dog"],
 )
 
-# plt.ylabel("Actual", fontsize=13)
-# plt.title("Confusion Matrix", fontsize=17, pad=20)
-# plt.gca().xaxis.set_label_position("top")
-# plt.xlabel("Prediction", fontsize=13)
-# plt.gca().xaxis.tick_top()
+plt.ylabel("Actual", fontsize=13)
+plt.title("Confusion Matrix", fontsize=17, pad=20)
+plt.gca().xaxis.set_label_position("top")
+plt.xlabel("Prediction", fontsize=13)
+plt.gca().xaxis.tick_top()
 
-# plt.gca().figure.subplots_adjust(bottom=0.2)
-# plt.gca().figure.text(0.5, 0.05, "Prediction", ha="center", fontsize=13)
-# plt.show()
+plt.gca().figure.subplots_adjust(bottom=0.2)
+plt.gca().figure.text(0.5, 0.05, "Prediction", ha="center", fontsize=13)
+plt.show()
 
-print(classification_report(actual, predicted))
+# print(classification_report(actual, predicted))
