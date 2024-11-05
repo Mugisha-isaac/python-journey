@@ -36,5 +36,32 @@ x_train, x_test, y_train, y_test = train_test_split(
     x, y, test_size=0.2, random_state=24
 )
 
-print(f"Train: {x_train.shape}, {y_train.shape}")
-print(f"Test: {x_test.shape}, {y_test.shape}")
+# print(f"Train: {x_train.shape}, {y_train.shape}")
+# print(f"Test: {x_test.shape}, {y_test.shape}")
+
+# Evaluating the test cores for models
+
+
+def cv_scoring(estimator, x, y):
+    return accuracy_score(y, estimator.predict(x))
+
+
+# initializing models
+
+models = {
+    "SVC": SVC(),
+    "Gaussian NB": GaussianNB(),
+    "Random Forest": RandomForestClassifier(),
+}
+
+
+# producing cross validation score for models
+
+for model_name in models:
+    model = models[model_name]
+    scores = cross_val_score(model, x, y, cv=10, n_jobs=-1, scoring=cv_scoring)
+
+    print("==" * 30)
+    print(model_name)
+    print(f"Scores: {scores}")
+    print(f"Mean score: {np.mean(scores)}")
