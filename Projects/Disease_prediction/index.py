@@ -42,26 +42,85 @@ x_train, x_test, y_train, y_test = train_test_split(
 # Evaluating the test cores for models
 
 
-def cv_scoring(estimator, x, y):
-    return accuracy_score(y, estimator.predict(x))
+# def cv_scoring(estimator, x, y):
+#     return accuracy_score(y, estimator.predict(x))
 
 
-# initializing models
+# # initializing models
 
-models = {
-    "SVC": SVC(),
-    "Gaussian NB": GaussianNB(),
-    "Random Forest": RandomForestClassifier(),
-}
+# models = {
+#     "SVC": SVC(),
+#     "Gaussian NB": GaussianNB(),
+#     "Random Forest": RandomForestClassifier(),
+# }
 
 
-# producing cross validation score for models
+# # producing cross validation score for models
 
-for model_name in models:
-    model = models[model_name]
-    scores = cross_val_score(model, x, y, cv=10, n_jobs=-1, scoring=cv_scoring)
+# for model_name in models:
+#     model = models[model_name]
+#     scores = cross_val_score(model, x, y, cv=10, n_jobs=-1, scoring=cv_scoring)
 
-    print("==" * 30)
-    print(model_name)
-    print(f"Scores: {scores}")
-    print(f"Mean score: {np.mean(scores)}")
+#     print("==" * 30)
+#     print(model_name)
+#     print(f"Scores: {scores}")
+#     print(f"Mean score: {np.mean(scores)}")
+
+# Training and testing SVM Classifier
+svm_model = SVC()
+svm_model.fit(x_train, y_train)
+preds = svm_model.predict(x_test)
+
+print(
+    f"Accuracy on train data by SVM Classifier\
+: {accuracy_score(y_train, svm_model.predict(x_train))*100}"
+)
+
+print(
+    f"Accuracy on test data by SVM Classifier\
+: {accuracy_score(y_test, preds)*100}"
+)
+cf_matrix = confusion_matrix(y_test, preds)
+plt.figure(figsize=(12, 8))
+sns.heatmap(cf_matrix, annot=True)
+plt.title("Confusion Matrix for SVM Classifier on Test Data")
+plt.show()
+
+# Training and testing Naive Bayes Classifier
+nb_model = GaussianNB()
+nb_model.fit(x_train, y_train)
+preds = nb_model.predict(x_test)
+print(
+    f"Accuracy on train data by Naive Bayes Classifier\
+: {accuracy_score(y_train, nb_model.predict(x_train))*100}"
+)
+
+print(
+    f"Accuracy on test data by Naive Bayes Classifier\
+: {accuracy_score(y_test, preds)*100}"
+)
+cf_matrix = confusion_matrix(y_test, preds)
+plt.figure(figsize=(12, 8))
+sns.heatmap(cf_matrix, annot=True)
+plt.title("Confusion Matrix for Naive Bayes Classifier on Test Data")
+plt.show()
+
+# Training and testing Random Forest Classifier
+rf_model = RandomForestClassifier(random_state=18)
+rf_model.fit(x_train, y_train)
+preds = rf_model.predict(x_test)
+print(
+    f"Accuracy on train data by Random Forest Classifier\
+: {accuracy_score(y_train, rf_model.predict(x_train))*100}"
+)
+
+print(
+    f"Accuracy on test data by Random Forest Classifier\
+: {accuracy_score(y_test, preds)*100}"
+)
+
+cf_matrix = confusion_matrix(y_test, preds)
+plt.figure(figsize=(12, 8))
+sns.heatmap(cf_matrix, annot=True)
+plt.title("Confusion Matrix for Random Forest Classifier on Test Data")
+plt.show()
